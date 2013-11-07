@@ -1,10 +1,12 @@
-﻿@model AtelierCorpo.Models.Anamnesis
+﻿@using AtelierCorpo.Models
+@model AtelierCorpo.Models.Anamnesis
 
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
+
 
 
 @using (Html.BeginForm()) 
@@ -16,7 +18,20 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
+        @foreach (Question item in ViewBag.Questions)
+        {
+            <div class="form-group">
+                @Html.Label(item.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Answer)
+                    @Html.ValidationMessageFor(model => model.Answer)
+                    @Html.EditorFor(model => model.Complement)
+                    @Html.ValidationMessageFor(model => model.Complement)
+                </div>
+            </div>
+        }
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Answer, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Answer)
@@ -30,7 +45,7 @@
                 @Html.EditorFor(model => model.Complement)
                 @Html.ValidationMessageFor(model => model.Complement)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

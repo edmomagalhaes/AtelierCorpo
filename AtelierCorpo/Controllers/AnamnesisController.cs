@@ -38,6 +38,7 @@ namespace AtelierCorpo.Controllers
         // GET: /Anamnesis/Create
         public ActionResult Create()
         {
+            ViewBag.Questions = db.Questions.ToList();
             return View();
         }
 
