@@ -47,16 +47,22 @@ namespace AtelierCorpo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Answer,Complement")] Anamnesis anamnesis)
+        //public ActionResult Create([Bind(Include="ID,Answer,Complement")] Anamnesis anamnesis)
+        public ActionResult Create( IList<Anamnesis> anamnesis, string user)
         {
             if (ModelState.IsValid)
             {
-                db.Anamnesises.Add(anamnesis);
+                foreach (Anamnesis item in anamnesis)
+                {
+                    item.User = db.Users.Find(int.Parse(user));
+                    item.Quastion = db.Questions.Find(item.QuestionId);
+                    db.Anamnesises.Add(item);    
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(anamnesis);
+            ViewBag.Questions = db.Questions.ToList();
+            return View();
         }
 
         // GET: /Anamnesis/Edit/5

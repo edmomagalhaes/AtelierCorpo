@@ -1,4 +1,5 @@
 ﻿@model AtelierCorpo.Models.User
+@using AtelierCorpo.Models
 
 @{
     ViewBag.Title = "Create";
@@ -112,12 +113,29 @@
             </div>
         </div>
 
+        <h4>Anamnesis</h4>
+        <hr />
+        <div class="form-group">
+            @foreach (Question item in ViewBag.Questions)
+            {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.Label(item.Title, new { @class = "control-label col-md-2" })
+                        @Html.Hidden("Question", item.ID, new { @name = "Anamnesis.QuestionId" })
+                        @Html.CheckBox("Answer", new { @name = "Anamnesis.Answer" })
+                        @Html.Editor("Complement", new { name = "Anamnesis.Complement" })
+                    </div>
+                </div>
+            }
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
+    
 }
 
 <div>

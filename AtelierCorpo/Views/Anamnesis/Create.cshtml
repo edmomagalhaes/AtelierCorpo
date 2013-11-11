@@ -17,16 +17,20 @@
         <h4>Anamnesis</h4>
         <hr />
         @Html.ValidationSummary(true)
+        @{ int i = 0; }
+        @Html.Hidden("user", 2)
 
         @foreach (Question item in ViewBag.Questions)
         {
             <div class="form-group">
                 @Html.Label(item.Title, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Answer)
+                    @Html.Hidden("QuestionId", item.ID)
+                    @Html.EditorFor(model => model.Answer, null, string.Format("[{0}].Answer", i))
                     @Html.ValidationMessageFor(model => model.Answer)
-                    @Html.EditorFor(model => model.Complement)
+                    @Html.EditorFor(model => model.Complement, null, string.Format("[{0}].Complement", i))
                     @Html.ValidationMessageFor(model => model.Complement)
+                    @{ i++; }>
                 </div>
             </div>
         }

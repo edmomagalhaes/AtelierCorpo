@@ -236,6 +236,7 @@
     <Content Include="Views\Anamnesis\Details.cshtml" />
     <Content Include="Views\Anamnesis\Edit.cshtml" />
     <Content Include="Views\Anamnesis\Index.cshtml" />
+    <Content Include="Views\Users\_anamnesis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

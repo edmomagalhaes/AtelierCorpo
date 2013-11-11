@@ -38,6 +38,7 @@ namespace AtelierCorpo.Controllers
         // GET: /Users/Create
         public ActionResult Create()
         {
+            ViewBag.Questions = db.Questions.ToList();
             return View();
         }
 
@@ -46,7 +47,8 @@ namespace AtelierCorpo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="UserID,Nane,CPF,Street,Number,Picture,District,ZipCode,Phone,Mobile,Prof,Email,Facebook")] User user)
+        //public ActionResult Create([Bind(Include = "UserID,Nane,CPF,Street,Number,Picture,District,ZipCode,Phone,Mobile,Prof,Email,Facebook")] User user, IList<bool> Answer, IList<int> Question, IList<string> Complement)
+        public ActionResult Create(User user, IList<Anamnesis> anamnesis)
         {
             if (ModelState.IsValid)
             {
